@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 var connectionString = builder.Configuration.GetConnectionString("BlogDb");
 builder.Services.AddDbContext<BlogContext>(options => options.UseSqlServer(connectionString));
+builder.Services.AddSession();
 
 var app = builder.Build();
 
@@ -26,6 +27,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",
